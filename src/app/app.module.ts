@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { FacultiesModule } from 'src/faculties/faculties.module';
 
 @Module({
   imports: [
@@ -11,6 +12,8 @@ import { MongooseModule } from '@nestjs/mongoose';
         uri: process.env.MONGODB_URI,
       }),
     }),
+    // Endpoint Module
+    FacultiesModule,
   ],
   controllers: [],
   providers: [],
