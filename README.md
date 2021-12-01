@@ -1,73 +1,174 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Fakultas-Prodi UPI API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
+
+1. [Description](https://github.com/fityannugroho/fakultas-prodi-upi#description)
+2. [Framework & Database](https://github.com/fityannugroho/fakultas-prodi-upi#framework-&-database)
+3. [Endpoint API](https://github.com/fityannugroho/fakultas-prodi-upi#endpoint-api)
+4. [Setting Environment](https://github.com/fityannugroho/fakultas-prodi-upi#setting-environment)
+5. [Running the App](https://github.com/fityannugroho/fakultas-prodi-upi#running-the-app)
+
+---
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is a Public API that contains general information such as attributes or names of faculties, regional campuses, and study programs at the Indonesian Education University (Universitas Pendidikan Indonesia - UPI), ranging from undergraduate to doctoral levels.
 
-## Installation
+## Framework & Database
 
-```bash
-$ npm install
+This project use [NestJS](https://nestjs.com) framework that writes in Typescript, and use [MongoDB](https://www.mongodb.com) database.
+
+## Endpoint API
+
+### 1. `GET /fakultas-prodi`
+
+**Get all faculties, regional campuses, and study programs.**
+
+Response example :
+
+```json
+ // Response for 200 (OK)
+{
+  "data": {
+    "universitas": "Universitas Pendidikan Indonesia",
+    "listFakultas": [
+      {
+        "namaFakultas": "FIP",
+        "listProdi": [
+          {
+            "kodeProdi": "A015",
+            "namaProdi": "Administrasi Pendidikan",
+          },
+          ...
+        ]
+      },
+      ...
+    ]
+  }
+}
 ```
 
-## Running the app
+### 2. `GET /fakultas`
+
+**Get all faculties.**
+
+Response example :
+
+```json
+// Response for 200 (OK)
+{
+  "data": [
+    {
+      "namaFakultas": "FIP",
+    },
+    ...
+  ]
+}
+```
+
+### 3. `GET /fakultas/{namaFakultas}/prodi`
+
+**Get all study programs from specific faculty name.** `namaFakultas` parameter is string and can contain spaces.
+
+Response example :
+
+```json
+// Response for 200 (OK)
+// Request example: /fakultas/FIP/prodi
+{
+  "data": {
+    "namaFakultas": "FIP",
+    "listProdi": [
+      {
+        "kodeProdi": "A015",
+        "namaProdi": "Administrasi Pendidikan"
+      },
+      ...
+    ]
+  }
+}
+
+// Response for 404 (NOT FOUND)
+// Request example: /fakultas/unknown/prodi
+{
+  "errors": [
+    {
+      "status": "404",
+      "title": "Tidak ditemukan",
+      "detail": "Prodi dari fakultas bersangkutan tidak ditemukan"
+    },
+  ]
+}
+```
+
+### 4. `GET /prodi`
+
+**Get all study programs.**
+
+Response example :
+
+```json
+// Response for 200 (OK)
+{
+  "data": {
+    "namaFakultas": "FIP",
+    "listProdi": [
+      {
+        "kodeProdi": "A015",
+        "namaProdi": "Administrasi Pendidikan"
+      },
+      ...
+    ]
+  }
+}
+```
+
+### 5. `GET /prodi/{kodeProdi}`
+
+**Get a study program from specified code.** `kodeProdi` parameter is string and alphanumeric.
+
+Response example :
+
+```json
+// Response for 200 (OK)
+{
+  "data": {
+    "kode": "G505",
+    "prodi": "Rekayasa Perangkat Lunak",
+    "fakultas": "Kampus UPI Cibiru",
+  }
+}
+
+// Response for 404 (NOT FOUND)
+{
+  "errors": [
+    {
+      "status": "404",
+      "title": "Tidak ditemukan",
+      "detail": "Kode prodi tidak ditemukan",
+    }
+  ]
+}
+```
+
+## Setting Environment
+
+- Duplicate `.template.env` file and rename it to `.env`.
+
+- Set `APP_PORT` with port number you want (default port is 3000).
+
+- Set `MONGODB_URI` with connection string of your cluster. It looks like `mongodb+srv://USERNAME:PASSWORD@CLUSTER_URL/DB_NAME?retryWrites=true&w=majority`. See [MongoDB docs](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster) for details.
+
+- Now you are ready to [run the app](https://github.com/fityannugroho/fakultas-prodi-upi#running-the-app).
+
+## Running The App
+
+For run the app in development environment, use this command :
 
 ```bash
-# development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+> See [nestjs.README.md](./nestjs.readme.md#running-the-app) file for details.
