@@ -112,16 +112,13 @@ Response example :
 ```json
 // Response for 200 (OK)
 {
-  "data": {
-    "namaFakultas": "FIP",
-    "listProdi": [
-      {
-        "kodeProdi": "A015",
-        "namaProdi": "Administrasi Pendidikan"
-      },
-      ...
-    ]
-  }
+  "data": [
+    {
+      "kode": "A015",
+      "prodi": "Administrasi Pendidikan"
+    },
+    ...
+  ]
 }
 ```
 
