@@ -19,4 +19,9 @@ export class FacultiesService {
       .map((study) => study.fakultas)
       .filter((val, i, arr) => arr.indexOf(val) === i);
   }
+
+  async findStudiesByFacultyName(facultyName: string) {
+    // Get all studies that match with facultyName.
+    return await this.studyModel.find({ fakultas: facultyName }).exec();
+  }
 }
