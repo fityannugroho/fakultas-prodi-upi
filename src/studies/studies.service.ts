@@ -11,6 +11,10 @@ export class StudiesService {
   ) {}
 
   async findAll() {
-    return this.studyModel.find();
+    return this.studyModel.find().exec();
+  }
+
+  async findByCode(studyCode: string) {
+    return this.studyModel.findOne({ kode: studyCode.toUpperCase() }).exec();
   }
 }
