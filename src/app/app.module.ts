@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { FacultiesStudiesModule } from 'src/faculties-studies/faculties-studies.module';
 import { FacultiesModule } from 'src/faculties/faculties.module';
 import { StudiesModule } from 'src/studies/studies.module';
 
@@ -16,6 +17,7 @@ import { StudiesModule } from 'src/studies/studies.module';
     // Endpoint Module
     FacultiesModule,
     StudiesModule,
+    FacultiesStudiesModule,
   ],
   controllers: [],
   providers: [],
