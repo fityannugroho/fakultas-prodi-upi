@@ -171,4 +171,4 @@ For run the app in development environment, use this command :
 $ npm run start
 ```
 
-> See [nestjs.README.md](./nestjs.readme.md#running-the-app) file for details.
+> See [nestjs.README.md](./nestjs.README.md#running-the-app) file for details.
