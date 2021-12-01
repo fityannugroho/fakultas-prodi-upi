@@ -5,7 +5,7 @@
 ## Table of Contents
 
 1. [Description](https://github.com/fityannugroho/fakultas-prodi-upi#description)
-2. [Framework & Database](https://github.com/fityannugroho/fakultas-prodi-upi#framework-&-database)
+2. [Framework & Database](https://github.com/fityannugroho/fakultas-prodi-upi#framework--database)
 3. [Endpoint API](https://github.com/fityannugroho/fakultas-prodi-upi#endpoint-api)
 4. [Setting Environment](https://github.com/fityannugroho/fakultas-prodi-upi#setting-environment)
 5. [Running the App](https://github.com/fityannugroho/fakultas-prodi-upi#running-the-app)
